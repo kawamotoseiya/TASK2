@@ -1,0 +1,7 @@
+<h6>Book was successfully created.</h6>
+<% @books.each do |book| %> <!-- @booksを@bookに変更 -->
+	<p>title</p>
+	<span><%= book.title %></span>
+	<p>body</p>
+	<span><%= book.body %></span>
+<% end %>
