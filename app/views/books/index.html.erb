@@ -1,21 +1,32 @@
-<header>
-</header>
-<body>
-	<h3 class="books">Books</h3>
+<h2>Books</h2>
+<table>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Body</th>
+			<th colspan="2"></th>
+		</tr>
+	</thead>
+	<tbody>
 		<% @books.each do |book| %>
-			<ul>
-				<li>Title:<%= book.title %></li>
-				<li>Body:<%= book.body %></li>
-			</ul>
+			<tr>
+				<td><%= book.title %></td>
+				<td><%= book.body %></td>
+				<td><%= link_to "Show", book %></td>
+				<td><%= link_to "Edit", edit_book_path(book) %></td>
+				<td><%= link_to "Destroy", book_path(book), method: :delete %></td>
+			</tr>
 		<% end %>
-	<h4 class="new book">New book</h4>
-		<%= form_for(@book) do |f| %>
+	</tbody>
+</table>
+<h4>New book</h4>
+	<%= form_for(@book) do |f| %>
 
-			<p>title</p>
-			<%= f.text_field :title %>
-			<p>body</p>
-			<%= f.text_area :body %><br>
+		<p>title</p>
+		<%= f.text_field :title %>
+		<p>body</p>
+		<%= f.text_area :body %><br>
 
-			<%= f.submit 'create book' %>
-		<% end %>
-</body>
+		<%= f.submit 'create book' %>
+	<% end %>
+
