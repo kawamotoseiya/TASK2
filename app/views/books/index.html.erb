@@ -1,6 +1,21 @@
-<% @books.each do |book| %> <!-- 1 @booksを@bookに変更 -->
-	<p>title</p>
-	<span><%=link_to book.title, book_path(book.id) %></span>
-	<p>body</p>
-	<span><%=link_to book.title, book_path(book.id) %></span>
-<% end %>
+<header>
+</header>
+<body>
+	<h3 class="books">Books</h3>
+		<% @books.each do |book| %>
+			<ul>
+				<li>Title:<%= book.title %></li>
+				<li>Body:<%= book.body %></li>
+			</ul>
+		<% end %>
+	<h4 class="new book">New book</h4>
+		<%= form_for(@book) do |f| %>
+
+			<p>title</p>
+			<%= f.text_field :title %>
+			<p>body</p>
+			<%= f.text_area :body %><br>
+
+			<%= f.submit 'create book' %>
+		<% end %>
+</body>
