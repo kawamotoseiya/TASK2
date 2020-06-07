@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   def index
-  	  @books = Book.order(created_at: :DESC).limit(7)
+  	  @books = Book.all
       @book = Book.new
   end
 
@@ -13,18 +13,27 @@ class BooksController < ApplicationController
   end
 
   def create
-  	  book = Book.new(book_params)
-  	  book.save
-  	  redirect_to book_path(book.id) # 1 bookをbooksに変更
+  	  @book = Book.new(book_params)
+  	  if @book.save
+  	     redirect_to book_path(@book.id) # 1 bookを@bookに変更
+         flash[:notice] = "Book was successfully created."
+      else
+        @books = Book.all
+        render :index
+      end
   end
 
   def edit
   	  @book = Book.find(params[:id])
   end
   def update
-  	  book = Book.find(params[:id])
-  	  book.update(book_params)
-  	  redirect_to book_path(book)
+  	  @book = Book.find(params[:id])
+  	  if @book.update(book_params)
+  	     redirect_to book_path(@book)
+         flash[:notice] = "Book was successfully updated."
+      else
+         render :edit
+      end
   end
   def destroy
   	  book = Book.find(params[:id])
